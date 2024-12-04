@@ -9,10 +9,12 @@ import Signup from "./components/Signup";
 import Add from "./components/add";
 import Logout from "./components/logout";
 import Edit from "./components/edit";
+import { ToastContainer } from "react-toastify";
 
 const App=()=> {
   return (
     <div className="">
+                <ToastContainer/>
 
 
       <Router>

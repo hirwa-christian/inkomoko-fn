@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "../assets/Image.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { ToastContainer,toast } from "react-toastify";
 const Signup = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -24,26 +24,40 @@ const Signup = () => {
     }
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/Trader/addUser`, values);
-      console.log(response.data);
-      navigate("/login");
+      console.log(response);
+      toast.success("Signup Success")
+      
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
+
+      
+
+      
     } catch (error) {
       console.error("Error during signup", error);
-      alert("Signup failed");
+      toast.error("Signup failed")
     }
   };
 
   return (
-    <div className="flex bg-[white] md:w-full lg:w-full w-full grid-cols-2 h-screen overflow-y-auto">
-      <div className="w-1/2 h-[1024px]">
-        <img src={Image} alt="" className="w-full bg-[white]" />
+   <>
+    <div>
+    <ToastContainer/>
+    </div>
+    <div className="grid bg-white w-full grid-cols-2 h-screen overflow-hidden">
+    
+      <div className="w-full h-screen relative">
+        <img src={Image} alt="" className="w-full bg-white object-cover h-screen" />
       </div>
-      <div className="w-1/2 p-4 h-full">
-        <h1 className="flex mt-10 ml-28 text-4xl font-semibold">Create an account</h1>
+      <div className="py-8 px-10 h-full ">
+        <h1 className="mt-10 text-4xl font-semibold">Create an account</h1>
         <form onSubmit={handleSubmit}>
-          <p className="flex text-lg mt-5 ml-28">
+          <p className="text-lg mt-5">
             Already have an account? Login in
           </p>
-          <label htmlFor="name" className="flex mt-5 text-[#666666] text-lg ml-28">
+         <div className="flex flex-col gap-2">
+         <label htmlFor="name" className="text-[#666666] text-lg">
             Company Name
           </label>
           <input
@@ -52,9 +66,11 @@ const Signup = () => {
             name="name"
             onChange={handleInputChange}
             value={values.name}
-            className="flex border p-5 py-4 rounded-xl border-slate-400 w-[600px] ml-28"
+            className="flex border p-3  rounded-xl border-slate-400 "
           />
-          <label htmlFor="email" className="ml-28 text-[#666666] text-lg">
+         </div>
+         <div className="flex flex-col gap-2">
+         <label htmlFor="email" className="text-[#666666] text-lg">
             Email address
           </label>
           <input
@@ -63,9 +79,11 @@ const Signup = () => {
             name="email"
             value={values.email}
             onChange={handleInputChange}
-            className="flex w-[600px] border p-5 border-slate-400 py-4 rounded-xl ml-28"
+            className="flex border p-3 border-slate-400 rounded-xl"
           />
-          <label htmlFor="password" className="text-[#666666] border-slate-500 ml-28 text-lg">
+         </div>
+        <div className="flex flex-col gap-2">
+        <label htmlFor="password" className="text-[#666666] border-slate-500 text-lg">
             Password
           </label>
           <input
@@ -74,17 +92,18 @@ const Signup = () => {
             name="password"
             onChange={handleInputChange}
             value={values.password}
-            className="border border-slate-500 py-4 p-5 rounded-xl w-[600px] ml-28"
+            className="border border-slate-500 p-3 rounded-xl"
           />
-          <p className="flex text-lg text-[#666666] mt-2 ml-28">
+        </div>
+          <p className="flex text-lg text-[#666666] mt-2">
             Use 8 or more characters with a mix of letters, numbers & symbols.
           </p>
-          <p className="mt-10 text-lg text-[#666666] ml-28">
+          <p className="mt-10 text-lg text-[#666666]">
             By creating an account, you agree to our{" "}
             <span className="border-b-2 border-black">Terms of Use</span> and{" "}
             <span className="border-b-2 border-black">Privacy Policy</span>.
           </p>
-          <div className="flex border p-2 border-slate-400 ml-28 w-96 py-4 mt-5 rounded-xl">
+          <div className="flex border p-2 border-slate-400 w-96 py-4 mt-5 rounded-xl">
             <input
               type="checkbox"
               checked={checke}
@@ -96,12 +115,12 @@ const Signup = () => {
             </span>
           </div>
           <button
-            className="flex border text-xl rounded-full bg-[#FB3F6C] text-white justify-center py-5 ml-28 w-60 mt-5"
+            className="flex border text-xl rounded-full bg-[#FB3F6C] text-white justify-center py-5 w-60 mt-5"
             type="submit"
           >
             Create an account
           </button>
-          <p className="ml-28 flex text-lg text-[#666666]">
+          <p className="flex text-lg text-[#666666]">
             Already have an account?{" "}
             <span className="ml-3 border-b-2 text-black border-black">
               <Link to="/login">Log in</Link>
@@ -110,6 +129,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

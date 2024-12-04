@@ -2,7 +2,10 @@ import axios from "axios";
 import React,{useState} from "react";
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
+
 const Login=()=>{
+    
     const navigate=useNavigate()
     const[values,setValues]=useState({
         email:"",
@@ -11,22 +14,30 @@ const Login=()=>{
     const handleInputChange=(e)=>{
         setValues({...values,[e.target.name]:e.target.value})
     }
+ 
     const handelSubmit=async(e)=>{
         
         e.preventDefault()
         try {
-            const response=await axios.post(`${process.env.REACT_APP_API_URL}/api/Trader/Userlogin`,values);
-
-            alert(response.data)
-            navigate('/dashboard')
-
+            const response =await axios.post(`${process.env.REACT_APP_API_URL}/api/Trader/Userlogin`,values);
+            toast.success("Login success")
+          console.log(response)
+          setTimeout(() => {
+            
+              navigate('/dashboard')
+          }, 3000);
+          
         } catch (error) {
             console.error('Error during login',error);
-            alert('Login failed')
+            toast.error("Invalid login credential")
         }
     }
     return(
+        
         <div className="w-[25%] mx-auto h-screen my-auto mt-20">
+            <div>                
+                <ToastContainer/>
+            </div>
             <div>
             <h1 className=" text-2xl font-bold italic text-center text-[#FF698D]">INKO<span className="text-2xl font-bold text-black">MOKO</span><span className="text-[#FF698D] text-2xl font-bold">.</span> </h1>
             <div className="my-10">
