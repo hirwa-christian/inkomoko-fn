@@ -10,6 +10,7 @@ import Add from "./components/add";
 import Logout from "./components/logout";
 import Edit from "./components/edit";
 import { ToastContainer } from "react-toastify";
+import ProtectedRoute from "./components/found";
 
 const App=()=> {
   return (
@@ -19,17 +20,28 @@ const App=()=> {
 
       <Router>
         <Routes>
-          <Route path="/edit/:id" element={<Edit/>}/>
-          <Route path="/table/edit/:id" element={<Edit/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+
+          <Route path="" element={<ProtectedRoute/>}>
+          <Route path="/edit/:id" element={<Edit/>}/>
+          <Route path="/table/edit/:id" element={<Edit/>}/>
           <Route path="/" element={<Login/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/simplebar" element={<Simplebar/>}/>
           <Route path="/halfpie" element={<Halfpie/>}/>
           <Route path="/table" element={<Table/>}/>
-          <Route path="/signup" element={<Signup/>}/>
           <Route path="/add" element={<Add/>}/>
+          <Route path="*" element={<div className="flex items-center justify-center flex-col">
+            <h1 >404 </h1>
+            <h2 >Page not found </h2>
+          </div>}/>
+          </Route>
+          <Route path="*" element={<div className="flex items-center justify-center flex-col">
+            <h1 >404 </h1>
+            <h2 >Page not found </h2>
+          </div>}/>
         
         </Routes>
       </Router>

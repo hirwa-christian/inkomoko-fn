@@ -25,6 +25,8 @@ const Login=()=>{
            setIsLoading(false)
             toast.success("Login success")
           console.log(response)
+     localStorage.setItem('isLoggedIn', "true");
+
           setTimeout(() => {
             
               navigate('/dashboard')
