@@ -21,6 +21,7 @@ const App=()=> {
           <Route path="/table/edit/:id" element={<Edit/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/" element={<Login/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/simplebar" element={<Simplebar/>}/>
           <Route path="/halfpie" element={<Halfpie/>}/>
