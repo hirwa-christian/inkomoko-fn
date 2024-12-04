@@ -5,6 +5,8 @@ const Logout=()=>{
     useEffect(()=>{
         localStorage.removeItem('tokrn');
         localStorage.removeItem('user')
+     localStorage.removeItem('isLoggedIn');
+
         navigate('/login')
     })
 
