@@ -7,6 +7,8 @@ import Goals from '../assets/Goal.svg'
 import Setting from '../assets/Settings.svg'
 import { Link } from "react-router-dom";
 import Overview from '../assets/Overview.svg'
+
+
 const Sidebar=()=>{
     return(
         <div className="fixed h-screen w-60 bg-[#191919]">
