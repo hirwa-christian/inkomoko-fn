@@ -3,9 +3,11 @@ import React,{useState} from "react";
 import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer,toast } from "react-toastify";
+import { FaSpinner } from "react-icons/fa";
 
 const Login=()=>{
     
+    const[isLoading,setIsLoading]=useState(false)
     const navigate=useNavigate()
     const[values,setValues]=useState({
         email:"",
@@ -16,10 +18,11 @@ const Login=()=>{
     }
  
     const handelSubmit=async(e)=>{
-        
+        setIsLoading(true)
         e.preventDefault()
         try {
             const response =await axios.post(`${process.env.REACT_APP_API_URL}/api/Trader/Userlogin`,values);
+           setIsLoading(false)
             toast.success("Login success")
           console.log(response)
           setTimeout(() => {
@@ -28,6 +31,7 @@ const Login=()=>{
           }, 3000);
           
         } catch (error) {
+            setIsLoading(false)
             console.error('Error during login',error);
             toast.error("Invalid login credential")
         }
@@ -58,7 +62,9 @@ const Login=()=>{
              className="border bg-[#F4F5F7] border-slate-300 w-full p-5 py-2 rounded-md"/>
 
                <input type="checkbox" className=""/> <span>keep me signed in</span> 
-            <button type="submit" className="w-full text-center font-semibold text-white mt-5 rounded bg-[#FF698D] h-10">Login</button>
+            <button type="submit" className="w-full flex items-center justify-center text-center font-semibold text-white mt-5 rounded bg-[#FF698D] h-10">
+                
+                {isLoading ? <FaSpinner className="animate-spin"/>: "Login"}</button>
             <p className="flex justify-center mt-5">or sign in with</p>
             
             <button type="type" className=" bg-[#D9D9D9] flex items-center justify-center gap-2 mt-5 rounded-md border w-full py-2 "><FcGoogle className="text-3xl"/>  Continue with Google</button>
@@ -67,6 +73,9 @@ const Login=()=>{
             </div>
             </div>
         </div>
+        
     )
 }
+
+
 export default Login

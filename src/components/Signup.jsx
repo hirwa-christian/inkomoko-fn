@@ -3,7 +3,9 @@ import Image from "../assets/Image.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer,toast } from "react-toastify";
+import { FaSpinner } from "react-icons/fa";
 const Signup = () => {
+  const[isLoading,setIsLoading]=useState(false)
   const navigate = useNavigate();
   const [values, setValues] = useState({
     name: "",
@@ -17,6 +19,7 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
     if (!checke) {
       alert("Please confirm you're not a robot.");
@@ -26,6 +29,7 @@ const Signup = () => {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/Trader/addUser`, values);
       console.log(response);
       toast.success("Signup Success")
+      setIsLoading(false)
       
       setTimeout(() => {
         navigate("/login");
@@ -37,6 +41,7 @@ const Signup = () => {
     } catch (error) {
       console.error("Error during signup", error);
       toast.error("Signup failed")
+      setIsLoading(false)
     }
   };
 
@@ -118,7 +123,7 @@ const Signup = () => {
             className="flex border text-xl rounded-full bg-[#FB3F6C] text-white justify-center py-5 w-60 mt-5"
             type="submit"
           >
-            Create an account
+            {isLoading ? <FaSpinner  className="animate-spin"/>:"Create an Account"}
           </button>
           <p className="flex text-lg text-[#666666]">
             Already have an account?{" "}
