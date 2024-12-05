@@ -40,13 +40,13 @@ const Login=()=>{
     }
     return(
         
-        <div className="w-[25%] mx-auto h-screen my-auto mt-20">
+        <div className="sm:w-full sm:px-5 lg:w-[25%] mx-auto h-screen my-auto sm:mt-10 lg:mt-20">
             <div>                
                 <ToastContainer/>
             </div>
             <div>
             <h1 className=" text-2xl font-bold italic text-center text-[#FF698D]">INKO<span className="text-2xl font-bold text-black">MOKO</span><span className="text-[#FF698D] text-2xl font-bold">.</span> </h1>
-            <div className="my-10">
+            <div className="flex sm:my-10 lg:my-10">
                 <form action="" onSubmit={handelSubmit}>
             <label className="text-xl">Email Address</label> <br />
             <input

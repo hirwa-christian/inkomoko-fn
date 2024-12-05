@@ -50,13 +50,16 @@ const Signup = () => {
     <div>
     <ToastContainer/>
     </div>
-    <div className="grid bg-white w-full grid-cols-2 h-screen overflow-hidden">
-    
-      <div className="w-full h-screen relative">
+    <div className="flex h-screen bg-white w-full overflow-hidden">
+
+      {/* image */}
+      <div className="sm:block md:hidden w-1/2 md:w-full h-screen relative">
         <img src={Image} alt="" className="w-full bg-white object-cover h-screen" />
-      </div>
-      <div className="py-8 px-10 h-full ">
-        <h1 className="mt-10 text-4xl font-semibold">Create an account</h1>
+      </div> 
+
+      {/* form */}
+      <div className="lg:px-10 sm:w-full sm:py-2 sm:px-5 lg:w-1/2 h-full ">
+        <h1 className="sm:mt-5 lg:mt-10 text-4xl font-semibold">Create an account</h1>
         <form onSubmit={handleSubmit}>
           <p className="text-lg mt-5">
             Already have an account? Login in
@@ -71,7 +74,7 @@ const Signup = () => {
             name="name"
             onChange={handleInputChange}
             value={values.name}
-            className="flex border p-3  rounded-xl border-slate-400 "
+            className="flex border sm:p-2 lg:p-3  rounded-xl border-slate-400 "
           />
          </div>
          <div className="flex flex-col gap-2">
@@ -84,7 +87,7 @@ const Signup = () => {
             name="email"
             value={values.email}
             onChange={handleInputChange}
-            className="flex border p-3 border-slate-400 rounded-xl"
+            className="flex border sm:p-2 lg:p-3 border-slate-400 rounded-xl"
           />
          </div>
         <div className="flex flex-col gap-2">
@@ -97,18 +100,18 @@ const Signup = () => {
             name="password"
             onChange={handleInputChange}
             value={values.password}
-            className="border border-slate-500 p-3 rounded-xl"
+            className="border border-slate-500 sm:p-2 lg:p-3 rounded-xl"
           />
         </div>
           <p className="flex text-lg text-[#666666] mt-2">
             Use 8 or more characters with a mix of letters, numbers & symbols.
           </p>
-          <p className="mt-10 text-lg text-[#666666]">
+          <p className="sm:mt-5 lg:mt-10 text-lg text-[#666666]">
             By creating an account, you agree to our{" "}
             <span className="border-b-2 border-black">Terms of Use</span> and{" "}
             <span className="border-b-2 border-black">Privacy Policy</span>.
           </p>
-          <div className="flex border p-2 border-slate-400 w-96 py-4 mt-5 rounded-xl">
+          <div className="flex border p-2 border-slate-400 lg:w-96 lg:py-4 mt-5 rounded-xl">
             <input
               type="checkbox"
               checked={checke}
@@ -120,7 +123,7 @@ const Signup = () => {
             </span>
           </div>
           <button
-            className="flex border text-xl rounded-full bg-[#FB3F6C] text-white justify-center py-5 w-60 mt-5"
+            className="flex border text-xl rounded-full bg-[#FB3F6C] text-white justify-center sm:py-2 lg:py-5 w-60 mt-5"
             type="submit"
           >
             {isLoading ? <FaSpinner  className="animate-spin"/>:"Create an Account"}
