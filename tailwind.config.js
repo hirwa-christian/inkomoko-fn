@@ -13,17 +13,14 @@ module.exports = {
           red:'#FF698D'
         }
       },
-      screens:{
-       'tablet': '640px',
-      // => @media (min-width: 640px) { ... }
-
-      'laptop': '1024px',
-      // => @media (min-width: 1024px) { ... }
-
-      'desktop': '1280px',
-      // => @media (min-width: 1280px) { ... }
-      }
+      
     },
+    screens:{
+      sm:{max:"767px"},
+      md:{max:"1023px"},
+      lg:{min:"1024px"},
+      
+      }
   },
   plugins: [],
 }
