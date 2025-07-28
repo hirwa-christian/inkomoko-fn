@@ -1,48 +1,43 @@
 import React, { useState } from "react";
 import Image from "../assets/Image.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { SignupUser } from "../service/signupService";
 import { ToastContainer,toast } from "react-toastify";
 import { FaSpinner } from "react-icons/fa";
+import { useMutation } from "@tanstack/react-query";
+
+
 const Signup = () => {
-  const[isLoading,setIsLoading]=useState(false)
   const navigate = useNavigate();
+   const [checke, setChecke] = useState(false);
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const [checke, setChecke] = useState(false);
-
+ 
+  const {mutate,isPending}=useMutation({
+    mutationFn:SignupUser,
+    onSuccess:()=>{
+      toast.success("Signup Success");
+      setTimeout(()=>navigate("/login"),3000);
+    },
+    onError:(error)=>{
+      console.error("Signup failed",error);
+      toast.error("Signup failed")
+    }
+  })
   const handleInputChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    setIsLoading(true)
     e.preventDefault();
     if (!checke) {
       alert("Please confirm you're not a robot.");
       return;
     }
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/Trader/addUser`, values);
-      console.log(response);
-      toast.success("Signup Success")
-      setIsLoading(false)
-      
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-
-      
-
-      
-    } catch (error) {
-      console.error("Error during signup", error);
-      toast.error("Signup failed")
-      setIsLoading(false)
-    }
+    mutate(values)
   };
 
   return (
@@ -126,7 +121,7 @@ const Signup = () => {
             className="flex border text-xl rounded-full bg-[#FB3F6C] text-white justify-center sm:py-2 lg:py-5 w-60 mt-5"
             type="submit"
           >
-            {isLoading ? <FaSpinner  className="animate-spin"/>:"Create an Account"}
+            {isPending ? <FaSpinner  className="animate-spin"/>:"Create an Account"}
           </button>
           <p className="flex text-lg text-[#666666]">
             Already have an account?{" "}
